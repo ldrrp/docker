@@ -37,6 +37,7 @@ RUN set -ex; \
         libzip-dev \
         libwebp-dev \
         libgmp-dev \
+        libssh2-1-dev \
     ; \
     \
     debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
@@ -62,12 +63,14 @@ RUN set -ex; \
     pecl install memcached-%%MEMCACHED_VERSION%%; \
     pecl install redis-%%REDIS_VERSION%%; \
     pecl install imagick-%%IMAGICK_VERSION%%; \
+    pecl install ssh2-1.2
     \
     docker-php-ext-enable \
         apcu \
         memcached \
         redis \
         imagick \
+        ssh2 \
     ; \
     \
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
